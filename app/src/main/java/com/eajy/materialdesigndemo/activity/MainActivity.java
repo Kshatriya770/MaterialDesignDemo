@@ -35,6 +35,7 @@ import com.eajy.materialdesigndemo.fragment.CardsFragment;
 import com.eajy.materialdesigndemo.fragment.DialogsFragment;
 import com.eajy.materialdesigndemo.fragment.WidgetsFragment;
 import com.eajy.materialdesigndemo.util.AppUtils;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
         initView();
         initViewPager();
 
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         try {
             PreferenceManager.setDefaultValues(this, R.xml.preferences_settings, false);
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         SharedPreferences sharedPreferences = getSharedPreferences("app", MODE_PRIVATE);
@@ -225,9 +228,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_menu_main_1:
-                Intent intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
+            case R.id.action_menu_main_about:
+                Intent aboutIntent = new Intent(this, AboutActivity.class);
+                startActivity(aboutIntent);
+                break;
+            case R.id.action_menu_main_donate:
+                Intent donateIntent = new Intent(this, DonateActivity.class);
+                startActivity(donateIntent);
+                break;
+            case R.id.action_menu_main_my_app:
+                Intent myAppsIntent = new Intent(this, MyAppsActivity.class);
+                startActivity(myAppsIntent);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -274,18 +285,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
                 break;
 
-            case R.id.nav_color:
-                if (AppUtils.checkAppInstalled(this, Constant.MATERIAL_DESIGN_COLOR_PACKAGE)) {
-                    intent = getPackageManager().getLaunchIntentForPackage(Constant.MATERIAL_DESIGN_COLOR_PACKAGE);
-                    if (intent != null) {
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    }
-                    startActivity(intent);
-                } else {
-                    intent.setData(Uri.parse(Constant.MATERIAL_DESIGN_COLOR_URL));
-                    intent.setAction(Intent.ACTION_VIEW);
-                    startActivity(intent);
-                }
+            case R.id.nav_my_apps:
+                intent.setClass(this, MyAppsActivity.class);
+                startActivity(intent);
                 break;
         }
 
