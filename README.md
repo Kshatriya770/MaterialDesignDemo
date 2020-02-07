@@ -1,4 +1,4 @@
-[Language：简体中文](https://github.com/Eajy/MaterialDesignDemo/blob/master/README_CN.md)  
+[Language：English (US)(https://github.com/Eajy/MaterialDesignDemo/blob/master/README_CN.md)  
   
 ---  
 
@@ -69,4 +69,4 @@ https://play.google.com/store/apps/details?id=com.eajy.materialdesigndemo
     Copyright © Google, Inc. All rights reserved.  
     https://material.io/icons/
   
-[_**- Designed by Eajy in China.**_](https://sites.google.com/view/eajy)
+[_**- Designed by Me**_](https://sites.google.com/view/eajy)
